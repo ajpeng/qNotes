@@ -5,14 +5,40 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { removeHTMLTags } from '../helpers';
+import { DesktopWindows } from '@material-ui/icons';
 
 class SidebarItemComponent extends React.Component {
-    constructor() {
-        super();
-    }
     render() {
-        return (<div>Hello from the sidebar item</div>);
+
+        const { _index, _note, classes, selectedNoteIndex } = this.props;
+        return (
+            <div key={_index}>
+                <ListItem
+                    className={classes.ListItem}
+                    selected={selectedNoteIndex === _index}
+                    alignItems='flex-start'>
+                    <div
+                        className={classes.textSection}
+                        onClick={() => this.selectNote(_note, _index)}>
+                        <ListItemText
+                            primary={_note.title}
+                            secondary={removeHTMLTags(_note.body.substring(0, 25)) + ' .... '}>
+                        </ListItemText>
+                    </div>
+                    <DeleteIcon onClick={() => this.deleteNote(_note)}
+                        className={classes.deleteIcon}>
+                    </DeleteIcon>
+                </ListItem>
+            </div>
+        );
     }
+
+    selectNote = (note, index) => this.props.selectNote(note, index);
+    deleteNote = (note) => {
+        if (window.confirm(`Are you sure you would like to delete: ${note.title}`)) {
+            this.props.deleteNote(note);
+        }
+    };
 }
 
 export default withStyles(styles)(SidebarItemComponent);
