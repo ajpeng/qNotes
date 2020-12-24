@@ -3,13 +3,11 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import List from '@material-ui/core/List';
 import { Divider, Button } from '@material-ui/core';
-import SidebarItemComponent from '../sidebaritem/sidebaritem'
-import { ThreeSixtyTwoTone } from '@material-ui/icons';
+import SidebarItemComponent from '../sidebaritem/sidebarItem';
 
 class SidebarComponent extends React.Component {
     constructor() {
         super();
-
         this.state = {
             addingNote: false,
             title: null
@@ -19,16 +17,12 @@ class SidebarComponent extends React.Component {
 
         const { notes, classes, selectedNoteIndex } = this.props;
 
-
         if (notes) {
             return (
-                <div className={classes.sidebarComponent}>
+                <div className={classes.sidebarContainer}>
                     <Button
                         onClick={this.newNoteBtnClick}
-                        className={classes.newNoteBtn}>
-                        {this.state.addingNote ? 'Cancel' : 'New Note'}
-                    </Button>
-
+                        className={classes.newNoteBtn}>{this.state.addingNote ? 'Cancel' : 'New Note'}</Button>
                     {
                         this.state.addingNote ?
                             <div>
@@ -39,12 +33,10 @@ class SidebarComponent extends React.Component {
                                 </input>
                                 <Button
                                     className={classes.newNoteSubmitBtn}
-                                    onClick={this.newNote}> Submit Note
-                                </Button>
+                                    onClick={this.newNote}>Submit Note</Button>
                             </div> :
                             null
                     }
-
                     <List>
                         {
                             notes.map((_note, _index) => {
@@ -57,35 +49,32 @@ class SidebarComponent extends React.Component {
                                             selectNote={this.selectNote}
                                             deleteNote={this.deleteNote}>
                                         </SidebarItemComponent>
+                                        <Divider></Divider>
                                     </div>
                                 )
-                            }
-                            )
+                            })
                         }
                     </List>
                 </div>
             );
         } else {
-            return (<div></div>)
+            return (<div></div>);
         }
-
     }
 
     newNoteBtnClick = () => {
-        this.setState({ addingNote: !this.state.addingNote, title: null });
-        console.log('NEW BTN CLICKED');
+        this.setState({ title: null, addingNote: !this.state.addingNote });
     }
-
     updateTitle = (txt) => {
-        this.setState({ title: txt })
+        this.setState({ title: txt });
     }
-
     newNote = () => {
-        console.log(this.state);
+        this.props.newNote(this.state.title);
+        this.setState({ title: null, addingNote: false });
     }
+    selectNote = (n, i) => this.props.selectNote(n, i);
+    deleteNote = (note) => this.props.deleteNote(note);
 
-    selectNote = () => { console.log('select a note'); }
-    deleteNote = () => { console.log('delete a note'); }
 }
 
 export default withStyles(styles)(SidebarComponent);

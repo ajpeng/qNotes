@@ -18,10 +18,20 @@ class App extends React.Component {
   render() {
     return (
       <div className="app-container">
-        <SidebarComponent
-          selectedNoteIndex={this.state.selectedNoteIndex}
-          notes={this.state.notes}></SidebarComponent>
-        <EditorComponent></EditorComponent>
+        <div>
+          <SidebarComponent
+            selectedNoteIndex={this.state.selectedNoteIndex}
+            notes={this.state.notes}
+            deleteNote={this.deleteNote}
+            selectNote={this.selectNote}
+            newNote={this.newNote}>
+          </SidebarComponent>
+        </div>
+        {
+          this.state.selectedNote ?
+            <EditorComponent></EditorComponent> :
+            null
+        }
       </div>
     );
   }
@@ -41,6 +51,12 @@ class App extends React.Component {
       });
   }
 
+  selectNote = (note, index) => {
+    this.setState({ selectedNoteIndex: index, selectedNote: note });
+  }
+
+  deleteNote = () => console.log('delete note');
+  newNote = () => console.log('new note');
 }
 
 export default App;
