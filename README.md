@@ -1,7 +1,6 @@
 # Getting Started
 
-This text editor which uses [Google Firebase](https://firebase.google.com/) to store the notes and thus the firebaseConfig object stored in `qnotes\src\index.js` will be required to be modified. To install the application run `npm install`. It fully 
-
+This text editor which uses [Google Firebase](https://firebase.google.com/) to store the notes and thus the firebaseConfig object stored in `qnotes\src\index.js` will be required to be modified. To install the application run `npm install`.
 ## Motivation
 
 In the process of learning React, I wanted to make some application, so I
