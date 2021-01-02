@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import List from '@material-ui/core/List';
 import { Divider, Button } from '@material-ui/core';
-import SidebarItemComponent from '../sidebaritem/sidebarItem';
+import SidebarItemComponent from '../sidebarItem/sidebarItem';
 
 class SidebarComponent extends React.Component {
     constructor() {
@@ -70,6 +70,7 @@ class SidebarComponent extends React.Component {
     }
     newNote = () => {
         this.props.newNote(this.state.title);
+        // resetting state for future notes
         this.setState({ title: null, addingNote: false });
     }
     selectNote = (n, i) => this.props.selectNote(n, i);
