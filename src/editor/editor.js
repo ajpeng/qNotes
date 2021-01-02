@@ -15,6 +15,26 @@ class EditorComponent extends React.Component {
         };
     }
 
+    // Used to show the first note on init
+    componentDidMount = () => {
+        this.setState({
+            text: this.props.selectedNote.body,
+            title: this.props.selectedNote.title,
+            id: this.props.selectedNote.id
+        });
+    }
+
+    // When user selects a different sidebar item (onChange only)
+    componentDidUpdate = () => {
+        if (this.props.selectedNote.id !== this.state.id) {
+            this.setState({
+                text: this.props.selectedNote.body,
+                title: this.props.selectedNote.title,
+                id: this.props.selectedNote.id
+            });
+        }
+    }
+
     render() {
 
         const { classes } = this.props;
@@ -37,8 +57,10 @@ class EditorComponent extends React.Component {
     }
 
     update = debounce(() => {
-        console.log('Updating database');
-        // debounce eff
+        this.props.noteUpdate(this.state.id, {
+            title: this.state.title,
+            body: this.state.text
+        });
     }, 2000);
 }
 

@@ -29,7 +29,10 @@ class App extends React.Component {
         </div>
         {
           this.state.selectedNote ?
-            <EditorComponent></EditorComponent> :
+            <EditorComponent selectedNote={this.state.selectedNote}
+              selectedNoteIndex={this.state.selectedNoteIndex}
+              notes={this.state.notes}
+              noteUpdate={this.noteUpdate}></EditorComponent> :
             null
         }
       </div>
@@ -53,6 +56,9 @@ class App extends React.Component {
 
   selectNote = (note, index) => {
     this.setState({ selectedNoteIndex: index, selectedNote: note });
+  }
+  noteUpdate = (id, noteObj) => {
+    console.log(id, noteObj);
   }
 
   deleteNote = () => console.log('delete note');
