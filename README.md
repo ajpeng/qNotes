@@ -1,6 +1,16 @@
 # Getting Started
 
-This application uses [Google Firebase](https://firebase.google.com/) to store the notes and thus the firebaseConfig object stored in `qnotes\src\index.js` will be required to be modified. To install the application run `npm install`.
+This text editor which uses [Google Firebase](https://firebase.google.com/) to store the notes and thus the firebaseConfig object stored in `qnotes\src\index.js` will be required to be modified. To install the application run `npm install`. It fully 
+
+## Motivation
+
+In the process of learning React, I wanted to make some application, so I
+though *I will make a Evernote clone, after all it is just a text editor*
+
+Things learned:
+
+* how to use Firestore
+* how to use React
 
 ## Available Scripts
 
